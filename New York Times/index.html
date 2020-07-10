@@ -1,0 +1,222 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+.header{
+font-family:Times New Roman;
+font-size:20px;
+}
+.abstract{
+font-size:15px;
+}
+.box{
+width:100%;
+background:#58D68D ;
+color:#E74C3C ;
+}
+.title{
+text-align:center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="box">
+<div class="title">
+<h1>The New York Times</h1>
+</div>
+</div>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-4" id="home">
+            <h1 style="background:#FDF2E9">Home</h1>
+          </div>
+          <div class="col-4" id="arts">
+            <h1 style="background:#FDF2E9">Arts</h1>
+          </div>
+           <div class="col-4" id="science">
+            <h1 style="background:#FDF2E9">Science</h1>
+          </div>
+        </div>
+    </div>	 
+</body>
+<script>					
+	function home() {						
+	fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=5V8xLuFRCFQciaGflTU0mZTCGxpkvkzT')
+      .then(function(data){ 
+		return data.json();
+		})
+	  .catch(function(error){
+		console.error("Error",error);
+		})
+	  .then(function(json){
+          jsondata = json;
+		  obj=jsondata.results;	 	
+	for(var i=0;i<obj.length;i++){
+			var war = document.createElement("div");
+			war.innerHTML=`<div class="container-fluid">
+							<div class="row">
+							<div class="col-12" style="padding:10px 10px 10px 10px"
+							style="margin:20px 20px 20px 20px"> 
+						<div class="card" style="margin-right:-40px">
+							<div class="card-header" style="color:blue">
+							<div class="header">
+							<strong>Title</strong>: `+obj[i].title+` style="font-size:60px"<br/>
+							<b>item_type</b>:`+obj[i].item_type+`<br/>
+							<b>section</b> :`+obj[i].section+`<br/>
+							created_date: `+obj[i].created_date+`<br/>
+							</div>
+							</div>
+							
+							<div class="card-body" style="background:#FDEDEC">
+							<div class="row">
+							<div class="col-6">
+							<div class="abstract">
+							<b>abstract</b>: `+obj[i].abstract+`<br/>
+							</div>
+							</div>
+							<div class="col-6">
+							<div class="img">
+							<img src=`+obj[i].multimedia[0].url+` style="width:100%">
+							</div>
+							</div>
+							</div>
+							
+							</div>
+							<div class="card-footer" style="background:#D4EFDF">
+							<strong>about more details...</strong><a href=`+obj[i].url+` alt=" " target="_blank" class="btn btn-secondary btn-sm">click me</a><br/>
+							</div>
+						</div>
+				</div>
+				</div>
+				</div>`
+			
+                     //document.body.appendChild(war);  
+                   document.getElementById("home").appendChild(war);
+				   
+      	}
+      });
+	}
+home();  
+
+	
+	  
+
+function arts(){								 
+ fetch('https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=TR2Bd0CKAeSpiSAalisbJOMCBLXP2n2K')
+      .then(function(data){ 
+		return data.json();
+		})
+	  .catch(function(error){
+		console.error("Error",error);
+		})
+	  .then(function(json){
+          jsondata = json;
+		  obj=jsondata.results;	 	
+	for(var i=0;i<obj.length;i++){
+			var war = document.createElement("div");
+			war.innerHTML=`<div class="container-fluid">
+							<div class="row">
+							<div class="col-12" style="padding:10px 10px 10px 10px"
+							style="margin:20px 20px 20px 20px"> 
+						<div class="card" style="margin-right:-30px">
+							<div class="card-header" style="color:blue">
+							<div class="header">
+							<strong>Title</strong>: `+obj[i].title+` style="font-size:60px"<br/>
+							<b>item_type</b>:`+obj[i].item_type+`<br/>
+							<b>section</b> :`+obj[i].section+`<br/>
+							created_date: `+obj[i].created_date+`<br/>
+							</div>
+							</div>
+							
+							<div class="card-body" style="background:#FDEDEC">
+							<div class="row">
+							<div class="col-6">
+							<div class="abstract">
+							<b>abstract</b>: `+obj[i].abstract+`<br/>
+							</div>
+							</div>
+							<div class="col-6">
+							<div class="img">
+							<img src=`+obj[i].multimedia[0].url+` target = "blank" style="width:100%">
+							</div>
+							</div>
+							</div>
+							
+							</div>
+							<div class="card-footer" style="background:#D4EFDF">
+							<strong>about more details...</strong><a href=`+obj[i].url+` alt=" " target="_blank" class="btn btn-secondary btn-sm">click me</a><br/>
+							</div>
+						</div>
+				</div>
+				</div>
+				</div>`
+				//document.body.appendChild(war);
+		document.getElementById("arts").appendChild(war); 
+      	}
+      });
+	 }
+arts(); 
+
+function science(){						
+	fetch('https://api.nytimes.com/svc/topstories/v2/politics.json?api-key=TR2Bd0CKAeSpiSAalisbJOMCBLXP2n2K')
+      .then(function(data){ 
+		return data.json();
+		})
+	  .catch(function(error){
+		console.error("Error",error);
+		})
+	  .then(function(json){
+          jsondata = json;
+		  obj=jsondata.results;	 		
+	for(var i=0;i<obj.length;i++){
+			var war = document.createElement("div");
+			war.innerHTML=`<div class="container-fluid">
+							<div class="row">
+							<div class="col-12" style="padding:10px 10px 10px 10px"> 
+						<div class="card" style="margin-right:-10px">
+							<div class="card-header" style="color:blue">
+							<div class="header">
+							<strong>Title</strong>: `+obj[i].title+` style="font-size:60px"<br/>
+							<b>item_type</b>:`+obj[i].item_type+`<br/>
+							<b>section</b> :`+obj[i].section+`<br/>
+							created_date: `+obj[i].created_date+`<br/>
+							</div>
+							</div>
+							
+							<div class="card-body" style="background:#FDEDEC">
+							<div class="row">
+							<div class="col-6">
+							<div class="abstract">
+							<b>abstract</b>: `+obj[i].abstract+`<br/>
+							</div>
+							</div>
+							<div class="col-6">
+							<div class="img">
+							<img src=`+obj[i].multimedia[0].url+` style="width:100%">
+							</div>
+							</div>
+							</div>
+							
+							</div>
+							<div class="card-footer" style="background:#D4EFDF">
+							<strong>about more details...</strong><a href=`+obj[i].url+` alt=" " target="_blank" class="btn btn-secondary btn-sm">click me</a><br/>
+							</div>
+						</div>
+				</div>
+				</div>
+				</div>`
+						
+					//document.body.appendChild(war);
+                       
+               document.getElementById("science").appendChild(war);
+				
+      	}
+      });
+	}
+science();  
+
+</script>
+
+</html>
